@@ -58,7 +58,7 @@ plt.style.use('fivethirtyeight')
 # LSTM
 
 df = web.DataReader('MSFT', data_source='yahoo', start='2014-04-01', end='2021-04-01')
-df
+# df
 
 plt.figure(figsize=(16, 8))
 plt.title('Close Price History')
@@ -71,13 +71,13 @@ data = df.filter(['Close'])
 dataset = data.values
 training_data_len = math.ceil( len(dataset) * 0.8 )
 
-print(training_data_len)
+# print(training_data_len)
 
 
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_data = scaler.fit_transform(dataset)
 
-print(scaled_data)
+# print(scaled_data)
 
 train_data = scaled_data[0:training_data_len, :]
 
@@ -87,16 +87,16 @@ y_train = []
 for i in range(60, len(train_data)):
   x_train.append(train_data[i-60:i, 0])
   y_train.append(train_data[i, 0])
-  if i<=61:
-    print(x_train)
-    print(y_train)
-    print()
+  # if i<=61:
+  #   print(x_train)
+  #   print(y_train)
+  #   print()
     
     
 x_train, y_train = np.array(x_train), np.array(y_train)
 
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
-print(x_train.shape)
+# print(x_train.shape)
 
 model = Sequential()
 model.add(LSTM(50, return_sequences=True, input_shape=(x_train.shape[1], 1)))
@@ -105,6 +105,7 @@ model.add(Dense(25))
 model.add(Dense(1))
 
 
+model.compile(optimizer='adam', loss='mean_squared_error')
 model.fit(x_train, y_train, batch_size=1, epochs=1)
 
 
@@ -125,13 +126,13 @@ x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 
 predictions = model.predict(x_test)
 predictions = scaler.inverse_transform(predictions)
-print(predictions)
+# print(predictions)
 
 
 model.summary()
 
 rmse = np.sqrt(np.mean(predictions-y_test)**2)
-print(rmse)
+print("RMSE: ", rmse)
 
 
 
@@ -150,7 +151,7 @@ plt.show()
 
 
 
-print(valid)
+# print(valid)
 
 apple_quote = web.DataReader('MSFT', data_source='yahoo', start='2014-01-01', end='2021-04-20')
 new_df = apple_quote.filter(['Close'])
@@ -164,19 +165,22 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 
 pred_price = model.predict(X_test)
 pred_price = scaler.inverse_transform(pred_price)
-print(pred_price)
+print("Predicted Price: ", pred_price)
 
 
 
 new = web.DataReader('MSFT', data_source='yahoo', start='2021-04-21', end='2021-04-21')
-new
+print("------------------------------------------")
+print("Printing prediction: ")
+print(new)
+print("------------------------------------------")
 
 
 # Save model to disk
-filename = 'finalized_model.sav'
-joblib.dump(model, filename)
+# filename = 'finalized_model.sav'
+# joblib.dump(model, filename)
 
-
+model.save("saved_model.h5")
 
 
 
