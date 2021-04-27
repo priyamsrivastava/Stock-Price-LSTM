@@ -107,7 +107,7 @@ model.add(Dense(1))
 
 
 model.compile(optimizer='adam', loss='mean_squared_error')
-model.fit(x_train, y_train, batch_size=1, epochs=1)
+model.fit(x_train, y_train, batch_size=1, epochs=5)
 
 
 test_data = scaled_data[training_data_len-60: , :]
@@ -172,7 +172,7 @@ print("Predicted Price: ", pred_price)
 
 new = web.DataReader('MSFT', data_source='yahoo', start='2021-04-21', end='2021-04-21')
 print("------------------------------------------")
-print("Printing prediction: ")
+print("Printing actual data: ")
 print(new)
 print("------------------------------------------")
 
