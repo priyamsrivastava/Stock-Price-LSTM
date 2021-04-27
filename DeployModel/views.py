@@ -1,6 +1,9 @@
+import joblib
+import numpy as np
+import keras
+import pandas_datareader as web
 from django.http import HttpResponse
 from django.shortcuts import render
-import joblib
 from keras.models import load_model
 
 def home(request):
@@ -8,25 +11,21 @@ def home(request):
 
 def result(request):
     # return render(request, 'result.html')
-    scaler = load_model("saved_model.h5")
+    scaler = keras.models.load_model("saved_model.h5")
 
-    lis = []
+    startDate = request.GET['start_date']
+    endDate = request.GET['end_date']
+    new = web.DataReader('MSFT', data_source='yahoo', start= startDate, end= endDate)
+    new
+
+    print(new)
+    pred = np.array(new.set_index("Close"))
+    p = pred[0][4]
+    p = np.array(p).reshape(1,1,1)
+    p
     
-    lis.append('MSFT')
-    lis.append('yahoo')
-    lis.append(request.GET['start_date'])
-    lis.append(request.GET['end_date'])  
-        
-    # lis.append(request.GET['high'])
-    # lis.append(request.GET['low'])
-    # lis.append(request.GET['open']) 
-    # lis.append(request.GET['volume'])
-    # lis.append(request.GET['adj'])
-    
-    print("Printing list ---->   ")
-    print(lis)
-    
-    
-    ans = scaler.predict([lis])
+    ans = scaler.predict(p)
+    ans = ans.reshape(1)
+    print(ans)
     
     return render(request, "result.html", {'ans': ans})

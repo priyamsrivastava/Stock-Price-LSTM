@@ -5,6 +5,7 @@ import math
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
 import matplotlib.pyplot as plt
+from keras.models import model_from_json
 from pandas_datareader import data as web
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
