@@ -12,12 +12,12 @@ def home(request):
 
 def result(request):
     # return render(request, 'result.html')
-    model = keras.models.load_model("saved_model.h5")
+    model = keras.models.load_model("D:\VSCode\Stock-Price-LSTM\ML_models\apple.h5")
     scaler = MinMaxScaler(feature_range=(0, 1))
 
     startDate = request.GET['start_date']
     endDate = request.GET['end_date']
-    data = web.DataReader('MSFT', data_source='yahoo', start= startDate, end= endDate)
+    data = web.DataReader('AAPL', data_source='yahoo', start= startDate, end= endDate)
     # new
 
     data_filtered = data.filter(['Close'])
@@ -48,7 +48,7 @@ def result(request):
 
     
     # ans = scaler.predict(p)
-    ans = pred_price.reshape(1)
+    ans = pred_price.reshape(1)[0]
     # print(ans)
     
     return render(request, "result.html", {'ans': ans})
