@@ -12,9 +12,9 @@ def home(request):
 
 def result(request):
     # load all the models
-    apple_model = keras.models.load_model("D:\VSCode\Stock-Price-LSTM\ML_models\first.h5")
-    google_model = keras.models.load_model("D:\VSCode\Stock-Price-LSTM\ML_models\goog.h5")
-    microsoft_model = keras.models.load_model("D:\VSCode\Stock-Price-LSTM\ML_models\msft.h5")
+    apple_model = keras.models.load_model("D:\\VSCode\\Stock-Price-LSTM\\ML_models\\aapl.h5")
+    google_model = keras.models.load_model("D:\\VSCode\\Stock-Price-LSTM\\ML_models\\goog.h5")
+    microsoft_model = keras.models.load_model("D:\\VSCode\\Stock-Price-LSTM\\ML_models\\msft.h5")
     
     # for scaling the testing dataset
     scaler = MinMaxScaler(feature_range=(0, 1))
