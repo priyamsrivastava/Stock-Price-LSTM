@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Price Prediction</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>Stock Price Prediction</h1>
+  <hr>
+  
+  <p>Get the prediction of stocks for the next day</p>
+  
+  <div id="main">
+    <div id="left">
+      <label for="company-name">Company name:</label>
+      <select name="company-name" id="company-name">
+        <option value="apple">Apple</option>
+        <option value="microsoft">Microsoft</option>
+        <option value="google">Google</option>
+      </select>
+    </div>
+
+    <div id="right">
+      <label for="date" id="second">Date:</label>
+      <input type="date" id="date" name="date">
+    </div>
+    <br>
+
+    <p class="note">Note: Enter the date for last successfully closed stock market</p>
+  </div>
+</body>
+</html>
