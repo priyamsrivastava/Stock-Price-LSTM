@@ -5,12 +5,59 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stock Price Prediction</title>
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="./index_style.css">
 </head>
+<style>
+  body {
+    background-color: black;
+    color: white;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  
+  hr {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  p {
+    font-size: 120%;
+    text-align: center;
+  }
+  
+  #main {
+    font-size: 120%;
+    width: 40%;
+    margin: 50px auto 0px auto;
+  }
+  
+  div #left {
+    float: left;
+  }
+  div #right {
+    float: right;
+  }
+  
+  .note {
+    margin-top: 50px;
+    font-size: 110%;
+  }
+  button{
+    margin-left: 275px;
+  }
+</style>
 <body>
   <h1>Stock Price Prediction</h1>
   <hr>
-  
+  <form action="{% url 'result' %}">
+    
+  {% csrf_token %}
+
+
   <p>Get the prediction of stocks for the next day</p>
   
   <div id="main">
@@ -30,6 +77,9 @@
     <br>
 
     <p class="note">Note: Enter the date for last successfully closed stock market</p>
+    <p></p>
+    <button> Submit </button>
+  </form>
   </div>
 </body>
 </html>

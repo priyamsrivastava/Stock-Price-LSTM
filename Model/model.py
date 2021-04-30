@@ -58,7 +58,7 @@ plt.style.use('fivethirtyeight')
 
 # LSTM
 
-df = web.DataReader('MSFT', data_source='yahoo', start='2014-04-01', end='2021-04-01')
+df = web.DataReader('AAPL', data_source='yahoo', start='2014-04-01', end='2021-04-01')
 # df
 
 plt.figure(figsize=(16, 8))
@@ -107,8 +107,7 @@ model.add(Dense(1))
 
 
 model.compile(optimizer='adam', loss='mean_squared_error')
-model.fit(x_train, y_train, batch_size=1, epochs=5)
-
+model.fit(x_train, y_train, batch_size=1, epochs=10)
 
 test_data = scaled_data[training_data_len-60: , :]
 
@@ -154,7 +153,7 @@ plt.show()
 
 # print(valid)
 
-apple_quote = web.DataReader('MSFT', data_source='yahoo', start='2014-01-01', end='2021-04-20')
+apple_quote = web.DataReader('AAPL', data_source='yahoo', start='2014-01-01', end='2021-04-20')
 new_df = apple_quote.filter(['Close'])
 last_60_days = new_df[-60:].values
 last_60_days_scaled = scaler.transform(last_60_days)
@@ -170,7 +169,7 @@ print("Predicted Price: ", pred_price)
 
 
 
-new = web.DataReader('MSFT', data_source='yahoo', start='2021-04-21', end='2021-04-21')
+new = web.DataReader('AAPL', data_source='yahoo', start='2021-04-21', end='2021-04-21')
 print("------------------------------------------")
 print("Printing actual data: ")
 print(new)
@@ -181,25 +180,7 @@ print("------------------------------------------")
 # filename = 'finalized_model.sav'
 # joblib.dump(model, filename)
 
-model.save("saved_model.h5")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+model.save("aaple.h5")
 
 # def predict_price(to_predict_list):
 #       to_predict = np.array(to_predict_list).reshape(1, 5)

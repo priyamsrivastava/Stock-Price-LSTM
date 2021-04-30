@@ -7,14 +7,14 @@ from django.shortcuts import render
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 
-def home(request):
-    return render(request, "home.html")
+def index(request):
+    return render(request, "index.html")
 
 def result(request):
     # load all the models
-    apple_model = keras.models.load_model("D:\\VSCode\\Stock-Price-LSTM\\ML_models\\aapl.h5")
-    google_model = keras.models.load_model("D:\\VSCode\\Stock-Price-LSTM\\ML_models\\goog.h5")
-    microsoft_model = keras.models.load_model("D:\\VSCode\\Stock-Price-LSTM\\ML_models\\msft.h5")
+    apple_model = keras.models.load_model(".\pple.h5")
+    google_model = keras.models.load_model(".\goog.h5")
+    microsoft_model = keras.models.load_model(".\msft.h5")
     
     # for scaling the testing dataset
     scaler = MinMaxScaler(feature_range=(0, 1))
