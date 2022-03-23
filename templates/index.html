@@ -54,32 +54,29 @@
   <h1>Stock Price Prediction</h1>
   <hr>
   <form action="{% url 'result' %}">
+    <p>Get the prediction of stocks for the next day</p>
     
-  {% csrf_token %}
+    <div id="main">
+      <div id="left">
+        <label for="company-name">Company name:</label>
+        <select name="company-name" id="company-name">
+          <option value="apple">Infosys</option>
+          <option value="apple">Tata Motors</option>
+          <option value="apple">ACC</option>
+        </select>
+      </div>
 
+      <div id="right">
+        <label for="date" id="second">Date:</label>
+        <input type="date" id="date" name="date">
+      </div>
+      
+      <br>
 
-  <p>Get the prediction of stocks for the next day</p>
-  
-  <div id="main">
-    <div id="left">
-      <label for="company-name">Company name:</label>
-      <select name="company-name" id="company-name">
-        <option value="apple">Apple</option>
-        <option value="microsoft">Microsoft</option>
-        <option value="google">Google</option>
-      </select>
+      <p class="note">Note: Enter the date for last successfully closed stock market</p>
+      <p></p>
+      <button>Submit</button>
     </div>
-
-    <div id="right">
-      <label for="date" id="second">Date:</label>
-      <input type="date" id="date" name="date">
-    </div>
-    <br>
-
-    <p class="note">Note: Enter the date for last successfully closed stock market</p>
-    <p></p>
-    <button> Submit </button>
   </form>
-  </div>
 </body>
 </html>
