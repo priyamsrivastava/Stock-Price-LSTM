@@ -22,7 +22,14 @@ def invTransform(scaler, data, colName, colNames):
 
 def predict_price(company_tag, start_date, end_date):
     #load models
-    infy_price_model = keras.models.load_model('.\model\infy.h5')
+    global price_model
+    if company_tag == 'INFY':
+        price_model = keras.models.load_model('.\model\infy.h5')
+    elif company_tag == 'TTM':
+        price_model = keras.models.load_model(".\model\motors.h5")
+    elif company_tag == 'ACC':
+        price_model = keras.models.load_model('.\model\cement.h5')
+    
     scaler = pickle.load(open('.\model\scaler.pkl', 'rb'))
     
     #fetch data of specified period
@@ -41,7 +48,7 @@ def predict_price(company_tag, start_date, end_date):
     X_test.append(last_60_days_scaled[:, np.array([True, True, True, False, True])])
     X_test = np.array(X_test)
     global pred_price
-    pred_price = infy_price_model.predict(X_test)
+    pred_price = price_model.predict(X_test)
     pred_price = invTransform(scaler, pred_price, 'Close', ['High', 'Low', 'Open', 'Close', 'Volume'])
     pred_price = pred_price[0]
 
@@ -108,7 +115,7 @@ def result(request):
         company_tag = 'INFY'
     elif(company_name == 'Tata Motors'):
         company_tag = 'TTM'
-    else:
+    elif(company_name == 'ACC'):
         company_tag = 'ACC'
 
     #get date of 3 months before
